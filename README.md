@@ -20,5 +20,5 @@ Other assets are not included.
 - Dynamic Culling (In development)
 # Links
 - [Development blog](http://mackysoft.hatenablog.com/archive/category/Unity%E3%81%A7RTS%E3%82%92%E4%BD%9C%E3%82%8B)
-- [Development video](https://www.youtube.com/playlist?list=PLe0iAfZJLA2EcHWM6A0YxoaBXjaqz4Top)
+- [Development video](https://youtu.be/4O3jvjkz5t0?list=PLe0iAfZJLA2EcHWM6A0YxoaBXjaqz4Top)
 - [Twitter](https://twitter.com/macky_soft)
