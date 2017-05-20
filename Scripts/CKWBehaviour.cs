@@ -48,13 +48,14 @@ namespace MackySoft.CubeKunWars {
 
 		protected virtual void OnDisable () {
 			list.Remove(this);
-			if (!isQuitting)
+			if (!isQuitting) {
 				status.Disable();
+				status = null;
+			}
 		}
 
 		protected virtual void Start () {
-			status = PoolManager.GetPoolSafe(StatusGUI.Prefab.gameObject).Get<StatusGUI>(StatusGUI.Canvas.transform);
-			status.Initialize(this);
+			
 		}
 
 		protected virtual void OnDestroy () {
@@ -63,6 +64,11 @@ namespace MackySoft.CubeKunWars {
 		
 		private void OnApplicationQuit () {
 			isQuitting = true;
+		}
+
+		protected virtual void Initialize () {
+			status = PoolManager.GetPoolSafe(StatusGUI.Prefab.gameObject).Get<StatusGUI>(StatusGUI.Canvas.transform);
+			status.Initialize(this);
 		}
 		
 		public float CalculatePriority (CKWBehaviour behaviour) {

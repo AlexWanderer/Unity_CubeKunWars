@@ -43,12 +43,6 @@ namespace MackySoft.CubeKunWars {
 		public CKWBehaviour Behaviour { get; private set; }
 
 		#endregion
-
-		public static StatusGUI Instantiate (CKWBehaviour behaviour) {
-			var ins = Instantiate(Prefab,Canvas.transform);
-			ins.Initialize(behaviour);
-			return ins;
-		}
 		
 		private void Awake () {
 			hpBarTr = hpBar.GetComponent<RectTransform>();
@@ -62,6 +56,7 @@ namespace MackySoft.CubeKunWars {
 			uft.target = Behaviour.Tr;
 			Behaviour.Health.onValueChanged.AddListener(OnHealthValueChanged);
 			UpdateArrowColor();
+			OnHealthValueChanged(Behaviour.Health);
 
 			gameObject.SetActive(true);
 		}

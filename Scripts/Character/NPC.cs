@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Chronos;
+
 namespace MackySoft.CubeKunWars {
 	public class NPC : CubeKun {
 
@@ -34,12 +36,12 @@ namespace MackySoft.CubeKunWars {
 		}
 
 		protected override void OnDisable () {
-			base.OnDisable();
 			if (player) Deselect();
+			base.OnDisable();
 		}
 
 		protected override void Update () {
-			if (GameManager.TimeState == Chronos.TimeState.Paused) return;
+			if (GameManager.TimeState == TimeState.Paused) return;
 			base.Update();
 			if (Mover.target) {
 				Mover.Move();

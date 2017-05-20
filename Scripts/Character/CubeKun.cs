@@ -39,8 +39,8 @@ namespace MackySoft.CubeKunWars {
 		protected override void Awake () {
 			base.Awake();
 			Arms = new Transform[] {
-				Tr.FindChild("Arm_L"),
-				Tr.FindChild("Arm_R")
+				Tr.Find("Arm_L"),
+				Tr.Find("Arm_R")
 			};
 
 			Weapons = GetComponentsInChildren<Weapon>();
@@ -57,12 +57,15 @@ namespace MackySoft.CubeKunWars {
 
 		protected override void OnEnable () {
 			base.OnEnable();
-			list.Add(this);
+			
+			
 		}
 
 		protected override void OnDisable () {
+			if (isQuitting) return;
 			base.OnDisable();
-			list.Remove(this);
+			
+			
 		}
 
 		protected override void Start () {
@@ -85,11 +88,22 @@ namespace MackySoft.CubeKunWars {
 
 		#endregion
 
-		public static CubeKun GetInstance (CubeKun prefab,Vector3 position,Quaternion rotation) {
-			return PoolManager.GetPoolSafe(prefab.gameObject).Get<CubeKun>(position,rotation);
+		public static CubeKun GetInstance (CubeKun prefab,Vector3 position,Quaternion rotation,Team team) {
+			var cubekun = PoolManager.GetPoolSafe(prefab.gameObject).Get<CubeKun>(position,rotation);
+			cubekun.Team = team;
+			cubekun.Initialize();
+			return cubekun;
+		}
+
+		protected override void Initialize () {
+			base.Initialize();
+			list.Add(this);
+			ForceBar.Instance.BarUpdate();
 		}
 
 		public void Disable () {
+			if (isQuitting) return;
+			list.Remove(this);
 			gameObject.SetActive(false);
 			Health.Value = Health.Max;
 			Target = null;
@@ -97,6 +111,7 @@ namespace MackySoft.CubeKunWars {
 				Weapons[i].ShootStop();
 				Weapons[i].Replenishment();
 			}
+			ForceBar.Instance.BarUpdate();
 		}
 
 		public void RotateArm () {

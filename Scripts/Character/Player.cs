@@ -32,8 +32,13 @@ namespace MackySoft.CubeKunWars {
 			Pointer = new GameObject("pointer").transform;
 			Mover.target = Pointer;
 
-			whistle = Tr.FindChild("Whistle");
+			whistle = Tr.Find("Whistle");
 			whistle.localScale = Vector3.zero;
+		}
+
+		protected override void Start () {
+			Initialize();
+			base.Start();
 		}
 
 		protected override void OnDestroy () {

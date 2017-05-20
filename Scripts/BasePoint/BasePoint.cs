@@ -41,7 +41,7 @@ namespace MackySoft.CubeKunWars {
 			
 			Rigid.isKinematic = true;
 		}
-
+		
 		protected override void OnEnable () {
 			base.OnEnable();
 			list.Add(this);
@@ -50,6 +50,11 @@ namespace MackySoft.CubeKunWars {
 		protected override void OnDisable () {
 			base.OnDisable();
 			list.Remove(this);
+		}
+
+		protected override void Start () {
+			base.Start();
+			Initialize();
 		}
 
 		protected virtual void OnTriggerEnter (Collider other) {

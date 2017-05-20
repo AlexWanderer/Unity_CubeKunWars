@@ -40,8 +40,7 @@ namespace MackySoft.CubeKunWars {
 		public CubeKun Spawn (CubeKun prefab) {
 			if (!prefab)
 				throw new ArgumentNullException("prefab");
-			var ins = CubeKun.GetInstance(prefab,Tr.position,Tr.rotation);
-			ins.Team = Team;
+			var ins = CubeKun.GetInstance(prefab,Tr.position,Tr.rotation,Team);
 			return ins;
 		}
 
